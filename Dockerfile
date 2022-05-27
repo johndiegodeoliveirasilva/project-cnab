@@ -6,5 +6,4 @@ WORKDIR /var/www/app/current
 
 COPY Gemfile /var/www/app/current/Gemfile
 COPY Gemfile.lock /var/www/app/current/Gemfile.lock
-RUN chmod +x bin/start-puma
 CMD bin/start-puma
