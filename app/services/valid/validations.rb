@@ -4,7 +4,7 @@ module Services
   class Valid::Validations
 
     MAP_METHOD = { 
-      "Arquivo corrumpido" => "total_size",
+      "Arquivo corrumpido." => "total_size",
       "1" => "type_transaction",
       "2..9" => "date",
       "10..19" => "value",
@@ -36,7 +36,8 @@ module Services
     end
 
     def value(args)
-      args[9..18].size.eql?(10)
+      value_cash = args[9..18]
+      (value_cash.to_f / 100.00) != 0.0 && value_cash.size.eql?(10)
     end
 
     def card(args)
