@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+bundle install
+bundle exec rake db:create db:migrate RAILS_ENV=test
+bundle exec puma -C config/puma.rb
