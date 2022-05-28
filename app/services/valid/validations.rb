@@ -1,18 +1,18 @@
 require "cpf_cnpj"
 
 module Services
-  class Valid::Validations
+  class Valid::Validations < CommonFields::Fields
 
     MAP_METHOD = { 
       "Arquivo corrumpido." => "total_size",
-      "1" => "type_transaction",
-      "2..9" => "date",
-      "10..19" => "value",
-      "20..30" => "cpf",
-      "31..42" => "card",
-      "43..48" => "hour",
-      "49..62" => "representant",
-      "63..81" => "name_company",
+      "1" => "kind_transaction",
+      "2..9" => "date_transaction",
+      "10..19" => "value_transaction",
+      "20..30" => "document_transaction",
+      "31..42" => "card_transaction",
+      "43..48" => "hour_transaction",
+      "49..62" => "representant_transaction",
+      "63..81" => "name_company_transaction",
     }.freeze
 
     def valid_fields(args)
@@ -22,38 +22,38 @@ module Services
       return true
     end
 
-    def type_transaction(args)
-      args[0].to_i.in?(1..9)
+    def kind_transaction(args)
+      kind(args).to_i.in?(1..9)
     end
 
-    def cpf(args)
-      document = args[19..29]
-      CPF.valid?(document) && document.size.eql?(11) 
+    def date_transaction(args)
+      date(args).size.eql?(8)
     end
 
-    def date(args)
-      args[1..8].size.eql?(8)
-    end
-
-    def value(args)
-      value_cash = args[9..18]
+    def value_transaction(args)
+      value_cash = value(args)
       (value_cash.to_f / 100.00) > 0.0 && value_cash.size.eql?(10)
     end
 
-    def card(args)
-      args[30..41].size.eql?(12)
+    def document_transaction(args)
+      cpf = document(args)
+      CPF.valid?(cpf) && cpf.size.eql?(11) 
     end
 
-    def hour(args)
-      args[42..47].size.eql?(6)
+    def card_transaction(args)
+      card(args).size.eql?(12)
     end
 
-    def representant(args)
-      args[48..61].size.eql?(14)
+    def hour_transaction(args)
+      hour(args).size.eql?(6)
     end
 
-    def name_company(args)
-      args[62..80].size.eql?(19)
+    def representant_transaction(args)
+      representant(args).size.eql?(14)
+    end
+
+    def name_company_transaction(args)
+      name_company(args).size.eql?(19)
     end
     
     def total_size(args)
