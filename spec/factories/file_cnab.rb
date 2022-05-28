@@ -1,5 +1,3 @@
-include ActionDispatch::TestProcess::FixtureFile
-
 FactoryBot.define do
   factory :file_cnab do
     title  { Faker::Name.name }
