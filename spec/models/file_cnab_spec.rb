@@ -4,8 +4,6 @@ include ActionDispatch::TestProcess::FixtureFile
 RSpec.describe FileCnab, type: :model do
   describe "valid model filecnab" do
     
-
-
     it "is not valid without title" do
       expect(FileCnab.new).to_not be_valid
     end
