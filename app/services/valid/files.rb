@@ -24,7 +24,7 @@ module Services
 
     def message_error(line, point)
      return point if point.eql?(MAP_METHOD.key("total_size"))
-     "Erro na verificação, na linha #{line} contem errors, entre a linha #{point}"
+     "Erro na verificação, na linha #{line} contem errors, na posição #{point}"
     end
   end
 end

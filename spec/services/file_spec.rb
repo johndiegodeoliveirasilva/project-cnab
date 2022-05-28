@@ -14,12 +14,12 @@ RSpec.describe Valid::Files, type: :service do
 
     it "cpf incorrect in line 1" do
       response = Valid::Files.run(cnabs_cpf_incorret)
-      expect(response).to eq("Erro na verificação, na linha 1 contem errors, entre a linha 20..30")
+      expect(response).to eq("Erro na verificação, na linha 1 contem errors, na posição 20..30")
     end
 
     it "when exist error in line 2 and cpf" do
       response = Valid::Files.run(cnabs_many_lines)
-      expect(response).to eq("Erro na verificação, na linha 2 contem errors, entre a linha 20..30")
+      expect(response).to eq("Erro na verificação, na linha 2 contem errors, na posição 20..30")
     end
 
     it "when the number of columns is less than 81" do
@@ -29,7 +29,13 @@ RSpec.describe Valid::Files, type: :service do
 
     it "when value cash is less than 0.0" do
       response = Valid::Files.run(cnabs_value_zero)
-      expect(response).to eq("Erro na verificação, na linha 1 contem errors, entre a linha 10..19")
+      expect(response).to eq("Erro na verificação, na linha 1 contem errors, na posição 10..19")
+    end
+
+    it "when the operation type is a letter" do
+      cnabs_correct[0] = 'a'
+      response = described_class.run(cnabs_correct)
+      expect(response).to eq("Erro na verificação, na linha 1 contem errors, na posição 1")
     end
   end
 end

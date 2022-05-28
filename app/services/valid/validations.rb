@@ -23,7 +23,7 @@ module Services
     end
 
     def type_transaction(args)
-      args[0].to_i.in?(1..12)
+      args[0].to_i.in?(1..9)
     end
 
     def cpf(args)
@@ -37,7 +37,7 @@ module Services
 
     def value(args)
       value_cash = args[9..18]
-      (value_cash.to_f / 100.00) != 0.0 && value_cash.size.eql?(10)
+      (value_cash.to_f / 100.00) > 0.0 && value_cash.size.eql?(10)
     end
 
     def card(args)
