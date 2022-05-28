@@ -1,5 +1,5 @@
 module CommonFields
-  class Fields
+  class Fields < Features::GenericMethods
     def kind(args)
       args[0]
     end

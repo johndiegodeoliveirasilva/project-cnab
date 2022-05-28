@@ -25,10 +25,7 @@ module Process
       filecab = FileCnab.new(title: title, status: true)
       filecab.file.attach(file)
       Valid::Files.run(read_file(filecab)) if filecab.save
-    end
-
-    def read_file(filecab)
-      filecab.file.download.force_encoding("UTF-8")
+      filecab
     end
   end
 end
