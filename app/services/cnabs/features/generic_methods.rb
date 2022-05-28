@@ -9,6 +9,11 @@ module Cnabs
       def read_file(filecab)
         filecab.file.download.force_encoding("UTF-8")
       end
+
+      def normalize_hour(hour)
+        t = Time.new(0000, 1, 1) + hour(hour).to_i
+        t.strftime("%H:%M:%S")
+      end
     end
   end
 end
