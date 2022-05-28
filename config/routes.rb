@@ -3,5 +3,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :file_cnabs
+
+  namespace :api do
+    namespace :v1 do
+      resources :file_cnabs, only: %w[index] do
+        collection do
+          post :process_file
+        end
+      end
+    end
+  end
 end
