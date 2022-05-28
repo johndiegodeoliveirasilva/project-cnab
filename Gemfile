@@ -57,6 +57,7 @@ group :development, :test do
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'rspec-rails'
   gem 'byebug'
+  gem 'pry-remote', '~> 0.1.8'
 end
 
 group :development do
