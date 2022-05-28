@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_27_033201) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_28_021632) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_033201) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "representative_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "file_cnabs", force: :cascade do |t|
     t.string "title"
     t.boolean "status", default: false
@@ -49,6 +56,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_27_033201) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "import_files", force: :cascade do |t|
+    t.decimal "value"
+    t.string "cpf"
+    t.string "card"
+    t.bigint "kind_transaction_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_import_files_on_company_id"
+    t.index ["kind_transaction_id"], name: "index_import_files_on_kind_transaction_id"
+  end
+
+  create_table "kind_transactions", force: :cascade do |t|
+    t.integer "kind"
+    t.string "description"
+    t.integer "nature"
+    t.text "signal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "import_files", "companies"
+  add_foreign_key "import_files", "kind_transactions"
 end
