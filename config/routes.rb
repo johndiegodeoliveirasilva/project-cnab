@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         end
       end
       resources :import_files, only: %w[index show]
+      resources :companies, only: %w[index show]
     end
   end
 end
