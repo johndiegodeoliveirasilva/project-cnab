@@ -1,11 +1,14 @@
 class Api::V1::FileCnabsController < ApplicationController
   protect_from_forgery with: :null_session
+  include Paginable
+
   def index
-    @file_cnabs = FileCnab.all
-    
+    @pagy, @file_cnabs = pagy(FileCnab.all, items: per_page, page: current_page)
+
+    options = get_links_serializer_options(:api_v1_file_cnabs_path, @pagy)
     respond_to do |format|
+      format.json { render json: FileCnabSerializer.new(@file_cnabs, options).serializable_hash }
       format.html
-      format.json { render json: @file_cnabs}
     end
   end
 
@@ -14,8 +17,8 @@ class Api::V1::FileCnabsController < ApplicationController
     if resp.is_a?(FileCnab)
       ImportFileWorkerJob.perform_async(resp.id) 
       respond_to do |format|
-        format.html { render html: resp }
-        format.json { render json: resp }
+        format.json { render json:  FileCnabSerializer.new(resp).serializable_hash }
+        format.html
       end
     else
       respond_to do |format|
@@ -23,6 +26,5 @@ class Api::V1::FileCnabsController < ApplicationController
         format.json { render json: resp, status: :unprocessable_entity }
       end
     end
-  
   end
 end

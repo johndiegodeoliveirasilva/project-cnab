@@ -6,7 +6,7 @@ FactoryBot.define do
     title  { Faker::Name.name }
     status { Faker::Boolean.boolean }
     
-    trait :with_file do
+    trait :with_attachment do
       file do
         arquive = Rails.root.join("spec", "support","assets", "files", "CNAB.txt")
         ActiveStorage::Blob.create_and_upload!(

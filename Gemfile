@@ -82,3 +82,7 @@ group :test do
 end
 
 gem "sidekiq", "~> 6.4"
+
+gem "jsonapi-serializer", "~> 2.2"
+
+gem "pagy", "~> 5.10"

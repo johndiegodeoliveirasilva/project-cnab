@@ -3,7 +3,7 @@ require 'rails_helper'
 include ActionDispatch::TestProcess::FixtureFile
 RSpec.describe FileCnab, type: :model do
 
-  let(:file_cnab) { create(:file_cnab, :with_file)}
+  let(:file_cnab) { create(:file_cnab, :with_attachment)}
 
   describe "valid model filecnab" do
     
