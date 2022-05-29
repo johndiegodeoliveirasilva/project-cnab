@@ -4,6 +4,7 @@ class ImportFileWorkerJob
   queue_as :default
 
   def perform(*args)
-    Cnabs::Imports::Creator.run(args)
+    file = FileCnab.where(id: args)
+    Cnabs::Imports::Creator.run(file)
   end
 end
