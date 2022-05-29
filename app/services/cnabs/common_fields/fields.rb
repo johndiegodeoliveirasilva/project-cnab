@@ -1,6 +1,6 @@
 module Cnabs
   module CommonFields
-    class Fields < Features::GenericMethods
+    class Fields < ::Base
       def kind(args)
         args[0]
       end

@@ -80,3 +80,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'simplecov', require: false
 end
+
+gem "sidekiq", "~> 6.4"
