@@ -4,7 +4,7 @@ module Cnabs
     class Process::Validations < CommonFields::Fields
 
       MAP_METHOD = { 
-        "Arquivo corrumpido." => "total_size",
+        "Arquivo corrompido." => "total_size",
         "1" => "kind_transaction",
         "2..9" => "date_transaction",
         "10..19" => "value_transaction",
