@@ -23,8 +23,7 @@ RSpec.describe Cnabs::Process::Files, type: :service do
     end
 
     it "when the number of columns is less than 81" do
-      response = described_class.run(cnabs_many_lines.delete(" "))
-      expect(response).to eq("Arquivo corrumpido.")
+      expect { described_class.run(cnabs_many_lines.delete(" ")) }.to raise_error(an_instance_of(RuntimeError).and having_attributes(message: "Arquivo corrompido."))
     end
 
     it "when value cash is less than 0.0" do
