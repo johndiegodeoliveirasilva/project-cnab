@@ -7,7 +7,7 @@ class Api::V1::FileCnabsController < ApplicationController
 
     options = get_links_serializer_options(:api_v1_file_cnabs_path, @pagy)
     respond_to do |format|
-      format.json { render json: FileCnabSerializer.new(FileCnab.all, options).serializable_hash }
+      format.json { render json: FileCnabSerializer.new(@file_cnabs, options).serializable_hash }
       format.html
     end
   end
