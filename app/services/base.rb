@@ -1,6 +1,6 @@
 class Base
   def message_error(line, point)
-    return point if point.eql?(Cnabs::Process::Validations::MAP_METHOD.key("total_size"))
+    raise point if point.eql?(Cnabs::Process::Validations::MAP_METHOD.key("total_size"))
     "Erro na verificação, na linha #{line} contem errors, na posição #{point}"
   end
 

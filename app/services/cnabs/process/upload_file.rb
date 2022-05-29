@@ -1,6 +1,6 @@
 module Cnabs
   module Process
-    class UploadFile
+    class UploadFile < Base 
       attr_accessor :file, :title
 
       def initialize(file)
@@ -23,10 +23,14 @@ module Cnabs
       end
 
       def instance_file
-        filecab = FileCnab.new(title: title, status: true)
-        filecab.file.attach(file)
-        Valid::Files.run(read_file(filecab)) if filecab.save
-        filecab
+        attachment = FileCnab.new(title: title, status: true)
+        attachment.file.attach(file)
+        attachment.save
+        Process::Files.run(read_file(attachment))
+        attachment
+      rescue => e
+        attachment.destroy
+        e.message
       end
     end
   end
