@@ -18,6 +18,7 @@ jobs:
         # Docker Hub image
         image: redis
         # Set health checks to wait until redis has started
+        ports: ["6379:6379"]
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
@@ -46,6 +47,7 @@ jobs:
           REDIS_HOST: redis
           # The default Redis port
           REDIS_PORT: 6379
+          REDIS_URL: redis://localhost:6379/0
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
         with:
