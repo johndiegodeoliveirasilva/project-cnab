@@ -2,11 +2,7 @@ class Api::V1::FileCnabsController < ApplicationController
   protect_from_forgery with: :null_session
   def index
     @file_cnabs = FileCnab.all
-    
-    respond_to do |format|
-      format.html
-      format.json { render json: @file_cnabs}
-    end
+    render json: FileCnabSerializer.new(FileCnab.all).serializable_hash
   end
 
   def process_file
@@ -15,7 +11,7 @@ class Api::V1::FileCnabsController < ApplicationController
       ImportFileWorkerJob.perform_async(resp.id) 
       respond_to do |format|
         format.html { render html: resp }
-        format.json { render json: resp }
+        format.json { render json:  FileCnabSerializer.new(resp).serializable_hash }
       end
     else
       respond_to do |format|

@@ -10,10 +10,9 @@ RSpec.describe Api::V1::FileCnabsController, type: :controller do
           file: fixture_file_upload("spec/support/assets/files/CNAB.txt")
         }, format: :json
       end
-      it { expect(response.code).to eq("200") }
+      it { expect(response).to have_http_status(:ok) }
       it { expect(FileCnab.count).to eq(1) }
       it { expect(FileCnab.last.title).to eq(title) }
-      it { expect(response.body.class).to eq(Hash) }
     end
 
     context "failure" do
@@ -24,7 +23,7 @@ RSpec.describe Api::V1::FileCnabsController, type: :controller do
         }, format: :json
       end
 
-      it { expect(response.code).to eq("422") }
+      it { expect(response).to have_http_status(:unprocessable_entity) }
       it { expect(response.body).to eq("Arquivo corrompido.") }
     end
   end
