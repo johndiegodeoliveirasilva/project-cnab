@@ -1,7 +1,7 @@
 require "cpf_cnpj"
 module Cnabs
   module Services
-    class Valid::Validations < CommonFields::Fields
+    class Process::Validations < CommonFields::Fields
 
       MAP_METHOD = { 
         "Arquivo corrumpido." => "total_size",
