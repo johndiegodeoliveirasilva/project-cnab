@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Cnabs::Valid::Files, type: :service do
+RSpec.describe Cnabs::Process::Files, type: :service do
   describe "valid file cnab" do
     let(:cnabs_correct) { "3201903010000014200058496701224753****3153153453JOÃO MACEDO   BAR DO JOÃO        " }
     let(:cnabs_cpf_incorret) { "2201903010000010700345152540738723****9987123333MARCOS PEREIRAMERCADO DA AVENIDA " }
