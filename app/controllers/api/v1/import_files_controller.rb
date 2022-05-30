@@ -1,5 +1,4 @@
 class Api::V1::ImportFilesController < ApplicationController
-  protect_from_forgery with: :null_session
   include Paginable
   before_action :define_import_file, only: %w[show]
 
