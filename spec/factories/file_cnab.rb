@@ -4,7 +4,7 @@ FactoryBot.define do
 
   factory :file_cnab do
     title  { Faker::Name.name }
-    status { Faker::Boolean.boolean }
+    status { true }
     
     trait :with_attachment do
       file do
