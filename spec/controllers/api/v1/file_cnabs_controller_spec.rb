@@ -57,6 +57,29 @@ RSpec.describe Api::V1::FileCnabsController, type: :controller do
         it { expect(json_response.dig(:links, :prev)).to be_truthy }
         it { expect(json_response.dig(:links, :next)).to be_truthy }
       end
+
+      describe 'filter' do
+        let(:file_cnab) { create(:file_cnab, :with_attachment, status: false, title: "empresario.txt", created_at: Date.new(1997, 01, 01)) }
+
+        it 'should filter file_cnabs by title' do
+          get :index, params: { title: file_cnab.title}, format: :json
+          expect(json_response.dig(:data).count).to eq(1)
+        end
+
+        it 'should filter file_cnabs by dates' do
+          get :index, params: { created_at_gteq: file_cnab.created_at, created_at_lteq: file_cnab.created_at}, format: :json
+          expect(json_response.dig(:data).count).to eq(1)
+        end
+      
+        it 'should filter file_cnabs by dates' do
+          get :index, params: { status: file_cnab.status }, format: :json
+          expect(json_response.dig(:data).count).to eq(1)
+        end
+        it 'should not filter file_cnabs by title' do
+          get :index, params: { title: "Monk.D Luffy"}, format: :json
+          expect(json_response.dig(:data).count).to eq(0)
+        end
+      end
     end
   end
 end
