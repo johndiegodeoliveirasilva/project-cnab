@@ -232,6 +232,9 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
+    rspec-sidekiq (3.1.0)
+      rspec-core (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
     rspec-support (3.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -318,6 +321,7 @@ DEPENDENCIES
   rails (~> 7.0.3)
   redis (~> 4.0)
   rspec-rails
+  rspec-sidekiq
   sassc-rails
   selenium-webdriver
   sidekiq (~> 6.4)
