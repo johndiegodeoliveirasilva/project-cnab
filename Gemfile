@@ -80,6 +80,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'simplecov', require: false
   gem 'rspec-sidekiq'
+  gem 'rails-controller-testing'
 end
 
 gem "sidekiq", "~> 6.4"
@@ -89,3 +90,9 @@ gem "jsonapi-serializer", "~> 2.2"
 gem "pagy", "~> 5.10"
 
 gem "ransack", "~> 3.2"
+
+gem "devise-jwt", "~> 0.9.0"
+gem "rack-cors"
+gem "devise"
+
+gem "bcrypt", "~> 3.1"

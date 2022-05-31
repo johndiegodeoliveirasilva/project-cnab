@@ -1,5 +1,4 @@
 class Api::V1::FileCnabsController < ApplicationController
-  protect_from_forgery with: :null_session
   include Paginable
 
   def index
@@ -14,6 +13,7 @@ class Api::V1::FileCnabsController < ApplicationController
   end
 
   def process_file
+    return render json: "sem arquivo", status: :unprocessable_entity if params[:file].blank?
     resp = Cnabs::Process::UploadFile.run(params[:file])
     if resp.is_a?(FileCnab)
       ImportFileWorkerJob.perform_async(resp.id) 

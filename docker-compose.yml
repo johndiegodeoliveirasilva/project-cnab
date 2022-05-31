@@ -45,5 +45,7 @@ services:
       - redis
     volumes:
       - .:/var/www/app/current
+    environment:
+      - secret_key_jwt=62950a403661
     ports:
       - "3000:3000"

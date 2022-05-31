@@ -1,5 +1,4 @@
 class Api::V1::CompaniesController < ApplicationController
-  protect_from_forgery with: :null_session
   include Paginable
   before_action :define_company, only: %w[show]
 
