@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "pages#index"
+  root "home#index"
 
   namespace :api do
     namespace :v1 do
@@ -22,4 +22,7 @@ Rails.application.routes.draw do
       resources :companies, only: %w[index show]
     end
   end
+
+  resources :import_files, only: %w[index show]
+  resources :companies, only: %w[index show]
 end
