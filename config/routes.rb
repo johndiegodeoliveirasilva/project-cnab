@@ -22,4 +22,7 @@ Rails.application.routes.draw do
       resources :companies, only: %w[index show]
     end
   end
+
+  resources :import_files, only: %w[index show]
+  resources :companies, only: %w[index show]
 end

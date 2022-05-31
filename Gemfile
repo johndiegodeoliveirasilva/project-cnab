@@ -96,3 +96,8 @@ gem "rack-cors"
 gem "devise"
 
 gem "bcrypt", "~> 3.1"
+
+gem "jsbundling-rails", "~> 1.0"
+gem 'jquery-rails'
+gem "responders"
+

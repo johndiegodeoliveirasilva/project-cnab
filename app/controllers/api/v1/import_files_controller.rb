@@ -1,4 +1,6 @@
 class Api::V1::ImportFilesController < ApplicationController
+  respond_to :json
+
   include Paginable
   before_action :define_import_file, only: %w[show]
 
@@ -7,18 +9,12 @@ class Api::V1::ImportFilesController < ApplicationController
     @pagy, @import_files = pagy(@q.result.includes(:company, :kind_transaction).all, items: per_page, page: current_page)
 
     options = get_links_serializer_options(:api_v1_import_files_path, @pagy)
-    respond_to do |format|
-      format.json { render json: ImportFileSerializer.new(@import_files, options).serializable_hash }
-      format.html
-    end
+    render json: ImportFileSerializer.new(@import_files, options).serializable_hash
   end
 
   def show
     options = { include: [:company, :kind_transaction] }
-    respond_to do |format|
-      format.json { render json: ImportFileSerializer.new(@import_file, options).serializable_hash }
-      format.html
-    end
+    render json: ImportFileSerializer.new(@import_file, options).serializable_hash
   end
 
   private
