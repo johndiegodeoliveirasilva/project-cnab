@@ -1,11 +1,18 @@
 require 'rails_helper'
+require_relative '../../../support/api_helper'
+include ApiHelper
+
 include ActionDispatch::TestProcess::FixtureFile
 RSpec.describe Api::V1::FileCnabsController, type: :controller do
   describe "FileCnabs" do
+    let(:user) { create(:user)}
+    before do
+      authenticated_header(request, user)
+    end
     describe "POST #process_file" do
       let(:title) { "CNAB.txt" }
       context "success" do
-        before do 
+        before do
           post :process_file, params: {
             name: title,
             file: fixture_file_upload("spec/support/assets/files/CNAB.txt")
