@@ -10,10 +10,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def register_success
-    render json: { message: 'Signed up successfully.' }
+    respond_to do |format|
+      format.json { render json: { message: 'Signed up successfully.' } }
+      format.html
+    end
+    
   end
 
   def register_failed
-    render json: { message: "Failed to register, #{resource.errors.full_messages.join(', ')}" }
+    respond_to do |format|
+      format.json { render json: { message: "Failed to register, #{resource.errors.full_messages.join(', ')}" } }
+      format.html
+    end
   end
 end
