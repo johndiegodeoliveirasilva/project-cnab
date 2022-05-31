@@ -1,8 +1,13 @@
 require 'rails_helper'
+require_relative '../../../support/api_helper'
+include ApiHelper
+
 RSpec.describe Api::V1::ImportFilesController, type: :controller do
+  let(:user) { create(:user)}
   describe "Import Files" do
     before do
       create_list(:import_file, 7)
+      authenticated_header(request, user)
     end
     let(:json_response) { JSON.parse(response.body, symbolize_names: true)}
     
