@@ -1,16 +1,22 @@
 require 'rails_helper'
+require_relative '../../../support/api_helper'
+include ApiHelper
+
 RSpec.describe Api::V1::CompaniesController, type: :controller do
+
+  let(:user) { create(:user)}
   describe "companies" do
     before do
       create_list(:import_file, 7)
+      authenticated_header(request, user)
+      get :index, format: :json
     end
+
     let(:json_response) { JSON.parse(response.body, symbolize_names: true)}
     
     describe "GET import_files#index" do
       context 'page in range' do
-        before do
-          get :index, format: :json
-        end
+       
         it { expect(response.status).to eq(200) }
         it { expect(json_response.dig(:links, :first)).to be_truthy }
         it { expect(json_response.dig(:links, :last)).to be_truthy }
