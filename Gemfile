@@ -80,6 +80,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'simplecov', require: false
   gem 'rspec-sidekiq'
+  gem 'rails-controller-testing'
 end
 
 gem "sidekiq", "~> 6.4"
